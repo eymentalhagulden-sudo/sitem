@@ -5,32 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cappella_666 | Profile</title>
     <link rel="stylesheet" href="style.css">
+    <!-- İkon kütüphanesi -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Arka Planda Sürekli Dönen Sesli Video Yapısı -->
     <div class="video-bg-container">
-        <video autoplay loop muted playsinline id="bg-video">
+        <video loop muted playsinline id="bg-video">
             <source src="arka-plan.mp4" type="video/mp4">
             Tarayıcınız video etiketini desteklemiyor.
         </video>
         <div class="video-overlay"></div>
     </div>
 
+    <!-- Ekranın Tam Ortasındaki Profil Kartı -->
     <div class="profile-container">
+        <!-- Profil Resmi ve Canlı Durum Işığı -->
         <div class="avatar-container">
             <img id="discord-avatar" src="https://placehold.co/150" alt="Avatar">
             <div id="status-dot" class="status-offline"></div>
         </div>
 
+        <!-- Kullanıcı Bilgileri -->
         <h1 id="discord-name">cappella_666</h1>
         <p id="discord-tag">@cappella_666</p>
 
+        <!-- Discord Canlı Aktivite Kutusu (Oyun/Spotify) -->
         <div id="discord-activity" class="activity-box" style="display: none;">
             <i class="fa-brands fa-discord"></i>
             <span id="activity-text">Şu an boşta</span>
         </div>
 
+        <!-- Sosyal Medya Butonları -->
         <div class="links-container">
             <a href="https://discord.com/users/1402320588516888740" target="_blank" class="link-card">
                 <i class="fa-brands fa-discord"></i> Discord Profiline Git
@@ -40,9 +47,6 @@
             </a>
             <a href="#" target="_blank" class="link-card">
                 <i class="fa-brands fa-github"></i> GitHub
-            </a>
-            <a href="#" target="_blank" class="link-card">
-                <i class="fa-solid fa-globe"></i> Website
             </a>
         </div>
     </div>
