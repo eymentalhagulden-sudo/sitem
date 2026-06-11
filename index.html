@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Command Prompt - Administrator: Ultimate Access</title>
+    <title>Command Prompt - Administrator: Cyber Override</title>
     <style>
         * {
             box-sizing: border-box;
@@ -79,11 +79,6 @@
             align-items: center;
             font-weight: bold;
         }
-        .window-controls span {
-            margin-left: 10px;
-            font-family: sans-serif;
-            cursor: pointer;
-        }
 
         /* Terminal İçeriği */
         #terminal-body {
@@ -122,11 +117,11 @@
 
         /* Kırmızı Alarm Modu */
         .panic-mode {
-            animation: redAlert 0.5s infinite alternate;
+            animation: redAlert 0.4s infinite alternate;
         }
         @keyframes redAlert {
             0% { background-color: #000000; }
-            100% { background-color: #330000; }
+            100% { background-color: #250000; }
         }
 
         #countdown-box {
@@ -148,25 +143,39 @@
             font-family: 'Segoe UI', sans-serif;
             padding: 10% 15%;
             z-index: 1000;
-            user-select: none;
             cursor: none;
         }
         #bsod h1 { font-size: 120px; font-weight: normal; margin-bottom: 20px; }
         #bsod p { font-size: 22px; line-height: 1.5; margin-bottom: 30px; }
+
+        /* Glitch Efekti (Ekran Çıldırma Animasyonu) */
+        .glitch-active {
+            animation: glitchAnim 0.1s infinite;
+        }
+        @keyframes glitchAnim {
+            0% { background-color: #0078d7; transform: translate(0, 0) skewX(0deg); filter: hue-rotate(0deg); }
+            20% { background-color: #ff0055; transform: translate(-4px, 2px) skewX(5deg); }
+            40% { background-color: #00ff33; transform: translate(3px, -3px) skewX(-10deg); filter: invert(100%); }
+            60% { background-color: #000000; transform: translate(-2px, -1px) skewX(15deg); }
+            80% { background-color: #ffff00; transform: translate(4px, 4px) skewX(-5deg); }
+            100% { background-color: #0078d7; transform: translate(0, 0) skewX(0deg); filter: hue-rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
+<!-- MAVİ EKRAN -->
 <div id="bsod">
-    <h1>:(</h1>
-    <p>Kişisel bilgisayarınız bir sorunla karşılaştı ve yeniden başlatılması gerekiyor. Yalnızca bazı hata bilgileri toplanıyor, ardından yeniden başlatılacak.</p>
+    <h1>:)</h1>
+    <p>Kişisel bilgisayarınız siber bir ihlalle karşılaştı. Sistem kontrolü tamamen devredildi. Güvenlik verileriniz indiriliyor, ardından imha işlemi başlayacak.</p>
     <p id="bsod-progress">%0 tamamlandı</p>
     <div style="font-size: 14px; margin-top: 5px; opacity: 0.8;">
-        Daha fazla bilgi edinmek için sonra çevrimiçi arayabilirsiniz: SYSTEM32_DELETED_BY_ROOT<br>
-        Durdurma kodu: KERNEL_DATA_INPAGE_ERROR
+        Daha fazla bilgi edinmek için root yetkilinizle görüşün: DETECTED_BY_EYMENTALHA01<br>
+        Durdurma kodu: SYSTEM32_TERMINATED_BY_ROBOT
     </div>
 </div>
 
+<!-- ŞIFRE EKRANI -->
 <div id="login-screen">
     <div id="login-container">
         <h2>--- ENCRYPTED MAINFRAME ---</h2>
@@ -176,12 +185,11 @@
     </div>
 </div>
 
+<!-- CMD EKRANI -->
 <div id="cmd-window" style="display: none;">
     <div id="cmd-header">
         <span>Microsoft Windows [Version 10.0.22631.3527]</span>
-        <div class="window-controls">
-            <span>—</span> <span>🗖</span> <span style="color: red;">✕</span>
-        </div>
+        <div style="font-family: sans-serif;">— 🗖 ✕</div>
     </div>
     <div id="terminal-body">
         <div class="output-line">(c) Microsoft Corporation. All rights reserved.</div>
@@ -191,8 +199,8 @@
         <div class="output-line"></div>
         
         <div id="countdown-box">
-            <h2 class="error" style="font-size: 20px; margin-bottom: 10px;">⚠️ KRİTİK UYARI: GERİ DÖNÜŞÜ OLMAYAN VERİ SİLME PROTOKOLÜ BAŞLADI ⚠️</h2>
-            <div class="warning" style="font-size: 24px; font-weight: bold;">SİSTEMİN KAPANMASINA KALAN SÜRE: <span id="timer">30</span> SANİYE</div>
+            <h2 class="error" style="font-size: 20px; margin-bottom: 10px;">⚠️ KRİTİK VERİ SIZINTISI PROTOKOLÜ ÇALIŞIYOR ⚠️</h2>
+            <div class="warning" style="font-size: 24px; font-weight: bold;">SİSTEM KİLİTLENDİ. SÜREÇ AKTİF.</div>
         </div>
 
         <div id="logs"></div>
@@ -214,14 +222,12 @@
     const inputLine = document.getElementById('input-line');
     const terminalBody = document.getElementById('terminal-body');
     const countdownBox = document.getElementById('countdown-box');
-    const timerText = document.getElementById('timer');
     const bsod = document.getElementById('bsod');
     const bsodProgress = document.getElementById('bsod-progress');
 
     let audioCtx = null;
     let alarmInterval = null;
 
-    // Ses motorunu başlatan fonksiyon (Bip sesleri için)
     function playBeep(freq, duration, type="sine") {
         try {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -238,7 +244,7 @@
         } catch(e){}
     }
 
-    // Şifre Kontrolü
+    // Şifre Girişi
     passwordField.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             if (passwordField.value === 'eymentalha01') {
@@ -256,7 +262,7 @@
         }
     });
 
-    // Otomatik Robot Modu Kod Havuzu
+    // Devasa Sızma ve Kamera Erişim Kod Blokları
     const massiveHackLines = [
         "INITIALIZING REMOTE OVERRIDE DETECTOR...",
         "CONNECTING TO HOST VIA BACKDOOR SH-81 [IP: 142.250.185.78]...",
@@ -264,13 +270,30 @@
         "STAGER_1: INJECTING PAYLOAD INTO REALTIME MEMORY RUNTIME...",
         "BYPASSING WINDOWS DEFENDER REAL-TIME PROTECTION... [OK]",
         "SUCCESS: ANTIVIRUS KILLED VIA KERNEL EXPLOIT.",
-        "[+] GEOLOCATION PROTOCOL ENGAGED...",
-        "[+] HEDEF LOKASYONU TESPİT EDİLDİ: Ankara / Türkiye",
-        "[+] ENLEM: 39.9334 // BOYLAM: 32.8597",
-        "[!] UYARI: HEDEF CİHAZIN ENTEGRE KAMERASINA ERİŞİLİYOR...",
-        "[+] KAMERA ERİŞİMİ BAŞARILI. ANLIK GÖRÜNTÜ ALINDI.",
-        "[+] KAYDEDİLİYOR -> C:\\Windows\\Temp\\captured_face.jpg",
-        "DUMPING USER PASSWORDS FROM MEMORY...",
+        "[+] GEOLOCATION PROTOCOL ENGAGED... Location: Ankara / Turkiye",
+        "==========================================================",
+        "[!] WEBCAM INTERCEPT PROTOCOL STARTED // ENABLING DRIVERS...",
+        "==========================================================",
+        "#include <opencv2/opencv.hpp>",
+        "using namespace cv;",
+        "VideoCapture cap(0); // ACCESSING INTEGRATED CAMERA ASSET 0...",
+        "if(!cap.isOpened()) { inject_alternative_driver(); } else {",
+        "    Mat frame; int frame_count = 0;",
+        "    while(frame_count < 500) {",
+        "        cap >> frame; // FETCHING RAW BUFFER CHUNKS...",
+        "        vector<uchar> buf; imencode(\".jpg\", frame, buf);",
+        "        send_packet_to_server(buf); // STREAMING VIDEO LIVE",
+        "        frame_count++;",
+        "    }",
+        "}",
+        "[+] CAMERA ACCESS GRANTED. RECORDING USER REALTIME REACTION...",
+        "[+] CAPTURED BUFFER CHUNKS STACKED AT MEMORY 0x7FFF503020A1",
+        "[+] SENDING FRAME DATA TO REMOTE SERVER VIA ENCRYPTED TUNNEL...",
+        "==========================================================",
+        "DUMPING LOCAL BROWSING HISTORY AND CREDIT CARDS...",
+        "SELECT card_number_encrypted, exp_month, exp_year FROM credit_cards;",
+        "[DATA FETCH] >> 4 adet kayitli kart verisi sızdırıldı.",
+        "DUMPING USER PASSWORDS FROM MEMORY HASHES...",
         "Administrator:500:aad3b435b514:31d6cfe0d16ae931b73...",
         "CRACKING HASHES USING LOCAL AGENT SYSTEM...",
         "HASH MATCH FOUND! PLAIN TEXT PASSWORD EXPOSED.",
@@ -285,7 +308,6 @@
         "private_keys.txt -> ENCRYPTED (.locked)",
         "ALERT: NETWORK INTRUSION DETECTION SYSTEM TRIGGERED!",
         "REDIRECTING TRAFFIC THROUGH TOR NODE: 45.138.12.9",
-        "ROUTING SECURE. DIGITAL FOOTPRINT ERASED.",
         "CLEARING ALL WINDOWS EVENT SECURITY LOGS...",
         "wevtutil cl Application && wevtutil cl Security",
         "EVENT LOGS WIPED CLEAN.",
@@ -304,7 +326,7 @@
             cmdInput.value = '';
 
             if (input === 'help') {
-                printLine("\nProtokol Listesi:\n- help: Komutlari listeler.\n- clear: Ekrani temizler.\n- auto hack: Otomatik yapay zeka hack robotunu baslatir.\n- delete system32: Sistem çekirdegini imha eder.\n", 'info');
+                printLine("\nProtokol Listesi:\n- help: Komutlari listeler.\n- clear: Ekrani temizler.\n- auto hack: Otomatik yapay zeka hack robotunu baslatir.\n- delete system32: Sistem çekirdegini tamamen imha eder.\n", 'info');
             } 
             else if (input === 'clear') {
                 logs.innerHTML = '';
@@ -316,7 +338,7 @@
                 triggerBSOD();
             }
             else if (input !== '') {
-                printLine(`'${input}' geçerli bir iç veya dis komut değil.`, 'error');
+                printLine(`'${input}' geçerli bir komut degil. Mavi ekran tetiklemek için 'delete system32' yazin.`, 'error');
             }
             
             terminalBody.scrollTop = terminalBody.scrollHeight;
@@ -330,25 +352,23 @@
         logs.appendChild(div);
     }
 
-    // Robot Modu
+    // Otomatik Robot Modu
     function startMassiveAutoHack() {
         inputLine.style.display = 'none';
         printLine("\n[SYSTEM ALERT] ROBOT EXPLOIT EXECUTED. INITIATING AUTO RUNTIME...\n", "error");
         
         let counter = 0;
-        
         const interval = setInterval(() => {
             if (counter < massiveHackLines.length) {
                 let currentText = massiveHackLines[counter];
                 let type = 'success';
                 
-                if (currentText.includes("WARNING") || currentText.includes("ALERT") || currentText.includes("UYARI")) type = 'error';
-                else if (currentText.includes("LOCKED") || currentText.includes("ENCRYPTING")) type = 'warning';
+                if (currentText.includes("WARNING") || currentText.includes("ALERT") || currentText.includes("WEBCAM") || currentText.includes("!]")) type = 'error';
+                else if (currentText.includes("ENCRYPTED") || currentText.includes("#") || currentText.includes("Mat ")) type = 'info';
+                else if (currentText.includes("LOCKED") || currentText.includes("DUMPING")) type = 'warning';
                 
                 printLine(`[ROBOT_MODE] ${currentText}`, type);
-                
-                // Siber tıkırtı sesleri çıkar
-                playBeep(800 + (Math.random() * 400), 0.05, "square");
+                playBeep(800 + (Math.random() * 400), 0.04, "square");
 
                 counter++;
                 terminalBody.scrollTop = terminalBody.scrollHeight;
@@ -356,36 +376,26 @@
                 clearInterval(interval);
                 triggerPanicMode();
             }
-        }, 150);
+        }, 110); // Akış hızı (Daha fazla kod olduğu için biraz hızlandırdım)
     }
 
-    // Kırmızı Alarm ve Geri Sayım Tetikleyicisi
+    // Kırmızı Alarm ve Siren (Mavi Ekran Gelmez, Sadece Bekletir)
     function triggerPanicMode() {
         document.body.classList.add('panic-mode');
         countdownBox.style.display = 'block';
+        printLine("\n[ALERT] UZAKTAN ERİŞİM SABİTLENDİ. SİSTEMİ TAMAMEN SİLMEK İÇİN 'delete system32' YAZIN VEYA BEKLEYİN...", "error");
         terminalBody.scrollTop = terminalBody.scrollHeight;
+        inputLine.style.display = 'flex'; // Girişi açıyoruz ki sen komut yazabil
+        cmdInput.focus();
 
-        // Siren Sesi Başlat
         let toggleSirene = true;
         alarmInterval = setInterval(() => {
-            playBeep(toggleSirene ? 900 : 600, 0.4, "sine");
+            playBeep(toggleSirene ? 950 : 650, 0.4, "sine");
             toggleSirene = !toggleSirene;
-        }, 500);
-
-        let secondsLeft = 30;
-        const timerInterval = setInterval(() => {
-            secondsLeft--;
-            timerText.innerText = secondsLeft;
-            
-            if (secondsLeft <= 0) {
-                clearInterval(timerInterval);
-                clearInterval(alarmInterval);
-                triggerBSOD();
-            }
-        }, 1000);
+        }, 450);
     }
 
-    // Mavi Ekran Tetikleyicisi
+    // Gülen Yüzlü Mavi Ekran ve Sonundaki Glitch Efekti
     function triggerBSOD() {
         if(alarmInterval) clearInterval(alarmInterval);
         document.body.classList.remove('panic-mode');
@@ -395,13 +405,24 @@
 
         let progress = 0;
         const progressInterval = setInterval(() => {
-            progress += Math.floor(Math.random() * 15) + 5;
+            progress += Math.floor(Math.random() * 8) + 3;
             if(progress >= 100) {
                 progress = 100;
                 clearInterval(progressInterval);
+                
+                // %100 Olunca Glitch Çıldırma Efektini Aç
+                bsodProgress.innerText = `%${progress} tamamlandı. BAĞLANTI KOPARILDI.`;
+                bsod.classList.add('glitch-active');
+                
+                // Kulak tırmalayıcı bir statik elektrik/arıza sesi çıkar
+                setInterval(() => {
+                    playBeep(100 + (Math.random() * 300), 0.1, "sawtooth");
+                }, 100);
+            } else {
+                bsodProgress.innerText = `%${progress} tamamlandı`;
+                playBeep(440, 0.05, "sine");
             }
-            bsodProgress.innerText = `%${progress} tamamlandı`;
-        }, 1200);
+        }, 800);
     }
 </script>
 
