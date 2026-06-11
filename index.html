@@ -3,54 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cappella_666 | Profile</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- İkon kütüphanesi -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Terminal - Mainframe Access</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #050505;
+            color: #00ff33;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            overflow-y: scroll;
+            height: 100vh;
+            text-shadow: 0 0 5px #00ff33;
+        }
+        /* CRT Ekran Çizgisi Efekti */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        #terminal {
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .output-line {
+            white-space: pre-wrap;
+            margin-bottom: 5px;
+        }
+        .error { color: #ff3333; text-shadow: 0 0 5px #ff3333; }
+        .success { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
+        .warning { color: #ffff00; text-shadow: 0 0 5px #ffff00; }
+        
+        #input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        #prompt {
+            margin-right: 10px;
+            color: #00ff33;
+        }
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: #00ff33;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex-grow: 1;
+            text-shadow: 0 0 5px #00ff33;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Arka Planda Sürekli Dönen Sesli Video Yapısı -->
-    <div class="video-bg-container">
-        <video loop muted playsinline id="bg-video">
-            <source src="arka-plan.mp4" type="video/mp4">
-            Tarayıcınız video etiketini desteklemiyor.
-        </video>
-        <div class="video-overlay"></div>
+<div id="terminal">
+    <div class="output-line warning">==================================================</div>
+    <div class="output-line warning">SYS-LOG: ANA SISTEME BAGLANTI KURULDU...          </div>
+    <div class="output-line warning">YARDIM ICIN 'help' YAZIN.                         </div>
+    <div class="output-line warning">==================================================</div>
+    <div id="logs"></div>
+    
+    <div id="input-line">
+        <span id="prompt">C:\Users\Root></span>
+        <input type="text" id="cmd-input" autofocus autocomplete="off" spellcheck="false">
     </div>
+</div>
 
-    <!-- Ekranın Tam Ortasındaki Profil Kartı -->
-    <div class="profile-container">
-        <!-- Profil Resmi ve Canlı Durum Işığı -->
-        <div class="avatar-container">
-            <img id="discord-avatar" src="https://placehold.co/150" alt="Avatar">
-            <div id="status-dot" class="status-offline"></div>
-        </div>
+<script>
+    const cmdInput = document.getElementById('cmd-input');
+    const logs = document.getElementById('logs');
+    const inputLine = document.getElementById('input-line');
 
-        <!-- Kullanıcı Bilgileri -->
-        <h1 id="discord-name">cappella_666</h1>
-        <p id="discord-tag">@cappella_666</p>
+    // "find hack" komutu yazılınca sırayla akacak havalı metinler
+    const hackTexts = [
+        "PROXIES INITIALIZED...",
+        "CONNECTING TO SYSTEM MAINFRAME [IP: 185.105.42.11]...",
+        "BYPASSING SECURITY FIREWALL... [ATTEMPT 1: FAILED]",
+        "BYPASSING SECURITY FIREWALL... [ATTEMPT 2: SUCCESS]",
+        "EXTRACTING USER_DATA.DB FROM TARGET...",
+        "CRITICAL WARNING: SYSTEM ADMINISTRATOR ALERTED!",
+        "DOWNLOADING ENCRYPTED ACCESS TOKENS...",
+        "PORT REBOUND: COOKIES INJECTED INTO PORT 8080...",
+        "SQL INJECTION SUCCESSFUL: DATABASE TABLES EXPOSED.",
+        "ACCESS GRANTED // CURRENT DIRECTORY: ROOT_ACCESS",
+        "DELETING LOG FILES TO ERASE DIGITAL FOOTPRINTS...",
+        "OVERRIDING TARGET DEVICE MAIN CONTROL...",
+        "HACKING COMPLETE. SYSTEM IS COMPLETELY COMPROMISED."
+    ];
 
-        <!-- Discord Canlı Aktivite Kutusu (Oyun/Spotify) -->
-        <div id="discord-activity" class="activity-box" style="display: none;">
-            <i class="fa-brands fa-discord"></i>
-            <span id="activity-text">Şu an boşta</span>
-        </div>
+    // Sayfada boş bir yere tıklansa bile input'a odaklansın (CMD hissi için)
+    document.addEventListener('click', () => {
+        cmdInput.focus();
+    });
 
-        <!-- Sosyal Medya Butonları -->
-        <div class="links-container">
-            <a href="https://discord.com/users/1402320588516888740" target="_blank" class="link-card">
-                <i class="fa-brands fa-discord"></i> Discord Profiline Git
-            </a>
-            <a href="#" target="_blank" class="link-card">
-                <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-            <a href="#" target="_blank" class="link-card">
-                <i class="fa-brands fa-github"></i> GitHub
-            </a>
-        </div>
-    </div>
+    cmdInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            let input = cmdInput.value.trim().toLowerCase();
+            printLine(`C:\\Users\\Root> ${cmdInput.value}`, '');
+            cmdInput.value = '';
 
-    <script src="script.js"></script>
+            if (input === 'help') {
+                printLine("\nKullanilabilir Komutlar:\n- help: Komutlari listeler.\n- clear: Ekrani temizler.\n- find hack: Hack işlemini baslatir.\n- status: Sistem durumunu gosterir.\n", 'success');
+            } 
+            else if (input === 'clear') {
+                logs.innerHTML = '';
+            } 
+            else if (input === 'status') {
+                printLine("SYSTEM STATUS: ONLINE\nFIREWALL: VULNERABLE\nTARGET IP: 85.105.42.11", 'success');
+            }
+            else if (input === 'find hack' || input === 'hack') {
+                startHackEffect();
+            } 
+            else if (input === '') {
+                // Boş bırakıp enter'larsa alt satıra geçsin
+            }
+            else {
+                printLine(`Hata: '${input}' taninan bir komut degil.`, 'error');
+            }
+            
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    });
+
+    function printLine(text, className) {
+        const div = document.createElement('div');
+        div.className = `output-line ${className}`;
+        div.innerText = text;
+        logs.appendChild(div);
+    }
+
+    function startHackEffect() {
+        inputLine.style.display = 'none'; // Giriş satırını gizle
+        printLine("\n!!! UYARI: ILLEGAL HACK ISLEMI BASLATILDI !!!\n", "error");
+        
+        let counter = 0;
+        
+        // Metinlerin akış hızı (200 milisaniye)
+        const interval = setInterval(() => {
+            if (counter < hackTexts.length) {
+                // Rastgele yeşil veya kırmızı renk vererek kaos yaratıyoruz
+                let type = Math.random() > 0.4 ? 'success' : 'error';
+                
+                // İlk ve son satır özel renkli olsun
+                if (counter === 0 || counter === hackTexts.length - 1) type = 'warning'; 
+                
+                printLine(`[+] ${hackTexts[counter]}`, type);
+                counter++;
+                window.scrollTo(0, document.body.scrollHeight);
+            } else {
+                clearInterval(interval);
+                printLine("\n[!] ISLEM TAMAMLANDI. SISTEM ELE GECIRILDI.", "warning");
+                inputLine.style.display = 'flex'; // Girişi tekrar aç
+                cmdInput.focus();
+            }
+        }, 220); 
+    }
+</script>
 </body>
 </html>
