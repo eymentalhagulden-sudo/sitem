@@ -27,142 +27,68 @@
         #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #ff0000;
+            background: #000; z-index: 999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ff0000;
         }
         #login-container {
-            width: 400px;
-            border: 1px solid #ff0000;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-            background: #050000;
+            width: 400px; border: 1px solid #ff0000; padding: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); background: #050000;
         }
-        #login-container h2 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            text-align: center;
-            letter-spacing: 2px;
-        }
+        #login-container h2 { font-size: 16px; margin-bottom: 15px; text-align: center; letter-spacing: 2px; }
         .pass-input {
-            width: 100%;
-            background: #000;
-            border: 1px solid #ff0000;
-            color: #ff0000;
-            padding: 8px;
-            font-family: inherit;
-            font-size: 16px;
-            outline: none;
-            text-align: center;
+            width: 100%; background: #000; border: 1px solid #ff0000; color: #ff0000;
+            padding: 8px; font-family: inherit; font-size: 16px; outline: none; text-align: center;
         }
 
-        /* Gerçek CMD Penceresi */
+        /* CMD Penceresi */
         #cmd-window {
-            display: none;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
+            display: none; width: 100%; height: 100%; background-color: #000000; flex-direction: column;
         }
         #cmd-header {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 3px 10px;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
+            background-color: #ffffff; color: #000000; padding: 3px 10px; font-size: 12px;
+            display: flex; justify-content: space-between; align-items: center; font-weight: bold;
         }
-
-        /* Terminal İçeriği */
-        #terminal-body {
-            flex-grow: 1;
-            padding: 10px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .output-line {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            margin-bottom: 2px;
-            letter-spacing: 0.5px;
-        }
+        #terminal-body { flex-grow: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; }
+        .output-line { white-space: pre-wrap; word-wrap: break-word; margin-bottom: 2px; letter-spacing: 0.5px; }
         .error { color: #ff3333; }
         .success { color: #00ff00; }
         .info { color: #00ffff; }
         .warning { color: #ffff00; }
-        
-        #input-line {
-            display: flex;
-            align-items: center;
-            margin-top: 5px;
-        }
+        #input-line { display: flex; align-items: center; margin-top: 5px; }
         #prompt { color: #ffffff; margin-right: 5px; }
-        #cmd-input {
-            background: transparent;
-            border: none;
-            color: #ffffff;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-            flex-grow: 1;
-        }
+        #cmd-input { background: transparent; border: none; color: #ffffff; font-family: inherit; font-size: inherit; outline: none; flex-grow: 1; }
 
-        /* Kırmızı Alarm Modu */
-        .panic-mode {
-            animation: redAlert 0.4s infinite alternate;
-        }
-        @keyframes redAlert {
-            0% { background-color: #000000; }
-            100% { background-color: #250000; }
-        }
-
-        #countdown-box {
-            display: none;
-            border: 2px dashed #ff0000;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            background: rgba(255, 0, 0, 0.1);
-        }
+        .panic-mode { animation: redAlert 0.4s infinite alternate; }
+        @keyframes redAlert { 0% { background-color: #000000; } 100% { background-color: #250000; } }
+        #countdown-box { display: none; border: 2px dashed #ff0000; padding: 15px; margin: 20px 0; text-align: center; background: rgba(255, 0, 0, 0.1); }
 
         /* Mavi Ekran (BSOD) */
         #bsod {
-            display: none;
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background-color: #0078d7;
-            color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
-            padding: 10% 15%;
-            z-index: 1000;
-            cursor: none;
+            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+            background-color: #0078d7; color: #ffffff; font-family: 'Segoe UI', sans-serif; padding: 10% 15%; z-index: 1000; cursor: none;
         }
         #bsod h1 { font-size: 120px; font-weight: normal; margin-bottom: 20px; }
         #bsod p { font-size: 22px; line-height: 1.5; margin-bottom: 30px; }
-
-        /* Glitch Efekti (Ekran Çıldırma Animasyonu) */
-        .glitch-active {
-            animation: glitchAnim 0.1s infinite;
-        }
+        
+        .glitch-active { animation: glitchAnim 0.1s infinite; }
         @keyframes glitchAnim {
             0% { background-color: #0078d7; transform: translate(0, 0) skewX(0deg); filter: hue-rotate(0deg); }
-            20% { background-color: #ff0055; transform: translate(-4px, 2px) skewX(5deg); }
-            40% { background-color: #00ff33; transform: translate(3px, -3px) skewX(-10deg); filter: invert(100%); }
-            60% { background-color: #000000; transform: translate(-2px, -1px) skewX(15deg); }
-            80% { background-color: #ffff00; transform: translate(4px, 4px) skewX(-5deg); }
-            100% { background-color: #0078d7; transform: translate(0, 0) skewX(0deg); filter: hue-rotate(360deg); }
+            40% { background-color: #ff0055; transform: translate(3px, -3px) skewX(-10deg); filter: invert(100%); }
+            70% { background-color: #00ff33; transform: translate(-2px, -1px) skewX(15deg); }
+            100% { background-color: #0078d7; filter: hue-rotate(360deg); }
+        }
+
+        /* KAPANDI SÜSÜ VEREN SİMSİYAH EKRAN */
+        #blackout-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #000000; z-index: 9999; cursor: default;
         }
     </style>
 </head>
 <body>
+
+<!-- SİMSİYAH EKRAN (KAPANDI EFEKTİ) -->
+<div id="blackout-screen"></div>
 
 <!-- MAVİ EKRAN -->
 <div id="bsod">
@@ -224,6 +150,7 @@
     const countdownBox = document.getElementById('countdown-box');
     const bsod = document.getElementById('bsod');
     const bsodProgress = document.getElementById('bsod-progress');
+    const blackoutScreen = document.getElementById('blackout-screen');
 
     let audioCtx = null;
     let alarmInterval = null;
@@ -233,14 +160,11 @@
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             let osc = audioCtx.createOscillator();
             let gain = audioCtx.createGain();
-            osc.type = type;
-            osc.frequency.value = freq;
+            osc.type = type; osc.frequency.value = freq;
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + duration);
         } catch(e){}
     }
 
@@ -262,7 +186,6 @@
         }
     });
 
-    // Devasa Sızma ve Kamera Erişim Kod Blokları
     const massiveHackLines = [
         "INITIALIZING REMOTE OVERRIDE DETECTOR...",
         "CONNECTING TO HOST VIA BACKDOOR SH-81 [IP: 142.250.185.78]...",
@@ -281,37 +204,20 @@
         "    Mat frame; int frame_count = 0;",
         "    while(frame_count < 500) {",
         "        cap >> frame; // FETCHING RAW BUFFER CHUNKS...",
-        "        vector<uchar> buf; imencode(\".jpg\", frame, buf);",
-        "        send_packet_to_server(buf); // STREAMING VIDEO LIVE",
         "        frame_count++;",
         "    }",
         "}",
         "[+] CAMERA ACCESS GRANTED. RECORDING USER REALTIME REACTION...",
         "[+] CAPTURED BUFFER CHUNKS STACKED AT MEMORY 0x7FFF503020A1",
-        "[+] SENDING FRAME DATA TO REMOTE SERVER VIA ENCRYPTED TUNNEL...",
         "==========================================================",
-        "DUMPING LOCAL BROWSING HISTORY AND CREDIT CARDS...",
-        "SELECT card_number_encrypted, exp_month, exp_year FROM credit_cards;",
-        "[DATA FETCH] >> 4 adet kayitli kart verisi sızdırıldı.",
-        "DUMPING USER PASSWORDS FROM MEMORY HASHES...",
-        "Administrator:500:aad3b435b514:31d6cfe0d16ae931b73...",
-        "CRACKING HASHES USING LOCAL AGENT SYSTEM...",
-        "HASH MATCH FOUND! PLAIN TEXT PASSWORD EXPOSED.",
-        "DOWNLOADING SENSITIVE BROWSER DATA & COOKIES...",
-        "File: chrome_cookies.db -> DOWNLOADING [34%]",
-        "File: chrome_cookies.db -> DOWNLOADING [78%]",
+        "DUMPING LOCAL BROWSER COOKIES AND SAVE PASSWORDS...",
         "File: chrome_cookies.db -> DOWNLOAD COMPLETE.",
         "DELETING ALL RECOVERY SHADOW COPIES...",
         "vssadmin delete shadows /all /quiet -> DONE.",
         "ENCRYPTING LOCAL FILE SYSTEM STORAGE WITH AES-256...",
-        "user_documents.zip -> ENCRYPTED (.locked)",
-        "private_keys.txt -> ENCRYPTED (.locked)",
         "ALERT: NETWORK INTRUSION DETECTION SYSTEM TRIGGERED!",
-        "REDIRECTING TRAFFIC THROUGH TOR NODE: 45.138.12.9",
         "CLEARING ALL WINDOWS EVENT SECURITY LOGS...",
-        "wevtutil cl Application && wevtutil cl Security",
         "EVENT LOGS WIPED CLEAN.",
-        "ESTABLISHING PERMANENT PERSISTENCE PROTOCOL...",
         "PERSISTENCE ESTABLISHED. SYSTEM FULLY COMPROMISED."
     ];
 
@@ -328,18 +234,10 @@
             if (input === 'help') {
                 printLine("\nProtokol Listesi:\n- help: Komutlari listeler.\n- clear: Ekrani temizler.\n- auto hack: Otomatik yapay zeka hack robotunu baslatir.\n- delete system32: Sistem çekirdegini tamamen imha eder.\n", 'info');
             } 
-            else if (input === 'clear') {
-                logs.innerHTML = '';
-            } 
-            else if (input === 'auto hack') {
-                startMassiveAutoHack();
-            } 
-            else if (input === 'delete system32') {
-                triggerBSOD();
-            }
-            else if (input !== '') {
-                printLine(`'${input}' geçerli bir komut degil. Mavi ekran tetiklemek için 'delete system32' yazin.`, 'error');
-            }
+            else if (input === 'clear') { logs.innerHTML = ''; } 
+            else if (input === 'auto hack') { startMassiveAutoHack(); } 
+            else if (input === 'delete system32') { triggerBSOD(); }
+            else if (input !== '') { printLine(`'${input}' geçerli bir komut degil. Mavi ekran için 'delete system32' yazin.`, 'error'); }
             
             terminalBody.scrollTop = terminalBody.scrollHeight;
         }
@@ -352,7 +250,6 @@
         logs.appendChild(div);
     }
 
-    // Otomatik Robot Modu
     function startMassiveAutoHack() {
         inputLine.style.display = 'none';
         printLine("\n[SYSTEM ALERT] ROBOT EXPLOIT EXECUTED. INITIATING AUTO RUNTIME...\n", "error");
@@ -362,30 +259,26 @@
             if (counter < massiveHackLines.length) {
                 let currentText = massiveHackLines[counter];
                 let type = 'success';
-                
-                if (currentText.includes("WARNING") || currentText.includes("ALERT") || currentText.includes("WEBCAM") || currentText.includes("!]")) type = 'error';
-                else if (currentText.includes("ENCRYPTED") || currentText.includes("#") || currentText.includes("Mat ")) type = 'info';
-                else if (currentText.includes("LOCKED") || currentText.includes("DUMPING")) type = 'warning';
+                if (currentText.includes("WARNING") || currentText.includes("ALERT") || currentText.includes("WEBCAM")) type = 'error';
+                else if (currentText.includes("ENCRYPTED") || currentText.includes("#")) type = 'info';
                 
                 printLine(`[ROBOT_MODE] ${currentText}`, type);
                 playBeep(800 + (Math.random() * 400), 0.04, "square");
-
                 counter++;
                 terminalBody.scrollTop = terminalBody.scrollHeight;
             } else {
                 clearInterval(interval);
                 triggerPanicMode();
             }
-        }, 110); // Akış hızı (Daha fazla kod olduğu için biraz hızlandırdım)
+        }, 110);
     }
 
-    // Kırmızı Alarm ve Siren (Mavi Ekran Gelmez, Sadece Bekletir)
     function triggerPanicMode() {
         document.body.classList.add('panic-mode');
         countdownBox.style.display = 'block';
-        printLine("\n[ALERT] UZAKTAN ERİŞİM SABİTLENDİ. SİSTEMİ TAMAMEN SİLMEK İÇİN 'delete system32' YAZIN VEYA BEKLEYİN...", "error");
+        printLine("\n[ALERT] UZAKTAN ERİŞİM SABİTLENDİ. MAVİ EKRAN TETİKLEMEK İÇİN 'delete system32' YAZIN...", "error");
         terminalBody.scrollTop = terminalBody.scrollHeight;
-        inputLine.style.display = 'flex'; // Girişi açıyoruz ki sen komut yazabil
+        inputLine.style.display = 'flex';
         cmdInput.focus();
 
         let toggleSirene = true;
@@ -395,34 +288,56 @@
         }, 450);
     }
 
-    // Gülen Yüzlü Mavi Ekran ve Sonundaki Glitch Efekti
+    // Mavi Ekran Süreci
     function triggerBSOD() {
         if(alarmInterval) clearInterval(alarmInterval);
         document.body.classList.remove('panic-mode');
         cmdWindow.style.display = 'none';
-        loginScreen.style.display = 'none';
         bsod.style.display = 'block';
 
         let progress = 0;
         const progressInterval = setInterval(() => {
-            progress += Math.floor(Math.random() * 8) + 3;
+            progress += Math.floor(Math.random() * 8) + 5;
             if(progress >= 100) {
                 progress = 100;
                 clearInterval(progressInterval);
-                
-                // %100 Olunca Glitch Çıldırma Efektini Aç
-                bsodProgress.innerText = `%${progress} tamamlandı. BAĞLANTI KOPARILDI.`;
+                bsodProgress.innerText = `%${progress} tamamlandı.`;
                 bsod.classList.add('glitch-active');
                 
-                // Kulak tırmalayıcı bir statik elektrik/arıza sesi çıkar
-                setInterval(() => {
+                let glitchAudio = setInterval(() => {
                     playBeep(100 + (Math.random() * 300), 0.1, "sawtooth");
                 }, 100);
+
+                // 2.5 saniye glitch yaptıktan sonra karart ve dosyayı indir
+                setTimeout(() => {
+                    clearInterval(glitchAudio);
+                    bsod.style.display = 'none';
+                    
+                    // SİTEYİ SİMSİYAH YAP (KAPANDI EFEKTİ)
+                    blackoutScreen.style.display = 'block';
+                    
+                    // NOT DEFTERİNİ BİLGİSAYARA İNDİR
+                    downloadHackedNote();
+                }, 2500);
             } else {
                 bsodProgress.innerText = `%${progress} tamamlandı`;
                 playBeep(440, 0.05, "sine");
             }
-        }, 800);
+        }, 500);
+    }
+
+    // Not Defteri Dosyasını İndiren Yapı
+    function downloadHackedNote() {
+        const textContent = "şimdi hacklendin dostum!\n\nSistemi geri açmak ve kurtarmak için alttaki linke tıkla:\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        
+        const blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "HACKED.txt"; 
+        
+        document.body.appendChild(link);
+        link.click(); 
+        document.body.removeChild(link);
     }
 </script>
 
